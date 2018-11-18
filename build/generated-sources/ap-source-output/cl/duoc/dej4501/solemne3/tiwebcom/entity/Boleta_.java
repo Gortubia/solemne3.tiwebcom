@@ -15,7 +15,9 @@ public class Boleta_ {
 
     public static volatile SingularAttribute<Boleta, Sucursal> idSucursal;
     public static volatile SingularAttribute<Boleta, Date> fecha;
+    public static volatile SingularAttribute<Boleta, Long> total;
     public static volatile SingularAttribute<Boleta, Cliente> idCliente;
     public static volatile ListAttribute<Boleta, DetBoleta> detBoletaList;
     public static volatile SingularAttribute<Boleta, Integer> idBoleta;
 
+}
