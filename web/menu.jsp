@@ -62,53 +62,57 @@
   </style>
         
     </head>
-    <body>     
+    <body>   
+        
+        <c:if test="${sessionScope.usuarioConectado == null}">
+        <c:redirect url="login.jsp"></c:redirect></c:if>
         
         <jsp:include page="/menu" flush="true"/>
         <jsp:useBean id="usuarioConectado" class="cl.duoc.dej4501.solemne3.tiwebcom.entity.Usuario" scope="session"/>
         <jsp:useBean id="objMenuPadre" class="cl.duoc.dej4501.solemne3.tiwebcom.entity.Menu" scope="page"></jsp:useBean>
         <jsp:useBean id="objMenuHijo" class="cl.duoc.dej4501.solemne3.tiwebcom.entity.Menu" scope="page"></jsp:useBean> 
-        
-        <div class="alert alert-success toast center" role="alert"  >
-            <c:if test="${sessionScope.msgError!=null}"> 
-                <fieldset><legend>Mensajes</legend>
-                    <c:out value="${sessionScope.msgError}"></c:out>
-                    <c:remove var="msgError"></c:remove>
-                    </fieldset> 
-            </c:if>
-        </div>
-        <ul id="slide-out" class="side-nav fixed z-depth-2">
-            <li class="center no-padding">
-                <div class="indigo darken-2 white-text" style="height: 180px;">
-                    <div class="row">
-                        <img style="margin-top: 5%;" width="100" height="100" src="img/logo.png" class="circle responsive-img" />
+
+            <ul id="slide-out" class="side-nav fixed z-depth-2">
+                <li class="center no-padding">
+                    <div class="indigo darken-2 white-text" style="height: 180px;">
+                        <div class="row">
+                            <img style="margin-top: 5%;" width="100" height="100" src="img/logo.png" class="circle responsive-img" />
+                        <c:if test="${sessionScope.msgError != null}"> 
+                            <div class="alert alert-success toast center" role="alert"  >
+                                <c:if test="${sessionScope.msgError!=null}"> 
+                                    <fieldset><legend>Mensajes</legend>
+                                        <c:out value="${sessionScope.msgError}"></c:out>
+                                        <c:remove var="msgError"></c:remove>
+                                        </fieldset> 
+                                </c:if>
+                            </div>
+                        </c:if> 
                         <p style="margin-top: -13%;">
                             Tenda web cómics
                         </p>
                     </div>
                 </div>
             </li>
-            <li id="dash_dashboard"><a class="waves-effect" href="index.jsp"><b>Tiwebcom</b></a></li>
+            <li id="dash_dashboard"><a class="waves-effect" href="index.jsp"><b>Tiwebcom Inicio</b></a></li>
             <ul class="collapsible" data-collapsible="acordion">
                 <c:forEach items="${listadoMenu}" var="objMenuPadre">                     
                     <c:if test="${objMenuPadre.padreMenu==0}">
                         <li id="dash_users">
                             <div id="dash_users_header" class="collapsible-header waves-effect"><b> <c:out value="${objMenuPadre.nombreMenu }"></c:out>  </b></div>
-                            <div id="dash_users_body" class="collapsible-body">
-                                <ul>
+                                <div id="dash_users_body" class="collapsible-body">
+                                    <ul>
                                     <c:forEach items="${listadoMenu}" var="objMenuHijo"> 
                                         <c:if test="${objMenuHijo.idMenu!=0 && objMenuPadre.idMenu==objMenuHijo.padreMenu}"> 
 
                                             <li id="users_seller">
                                                 <a class="nav-link text-uppercase text-expanded" href="<c:out value="${objMenuHijo.destinoMenu}"/>"><c:out value="${objMenuHijo.nombreMenu}"></c:out></a>
-                                                    <a class="waves-effect" style="text-decoration: none;" href="login.jsp">Ingresar</a>
                                                 </li>
                                         </c:if>
                                     </c:forEach> 
-                               </ul>
+                                </ul>
                             </div>
                         </li>
-                     </c:if>
+                    </c:if>
                 </c:forEach>
             </ul>
         </ul>
@@ -142,11 +146,14 @@
 
             <nav>
                 <div class="nav-wrapper indigo darken-2">
-                    <a style="margin-left: 20px;" class="breadcrumb" href="#!">Usuario : <c:out value="${usuarioConectado.nombreUsuario}"/></a>
+                    <a style="margin-left: 20px;" class="breadcrumb" href="#!">Usuario : <c:out value="${usuarioConectado.loginUsuario}"/></a>
                     <div style="margin-right: 20px;" id="timestamp" class="right"></div>
                 </div>
             </nav>
         </header>
- 
+         
+                    
+       
+
     </body>
 </html>

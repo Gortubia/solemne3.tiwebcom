@@ -64,32 +64,34 @@
 </head>
 
 <body>
-
+    
+   <c:if test="${sessionScope.usuarioConectado == null}">
+   <c:redirect url="login.jsp"></c:redirect></c:if>
    <jsp:include page="menu.jsp"></jsp:include>
 
   <main>
-    <div class="row">
+   <div class="row">
       <div class="col s6">
         <div style="padding: 35px;" align="center" class="card">
           <div class="row">
             <div class="left card-title">
-              <b>comics</b>
+              <b>Comics</b>
             </div>
           </div>
 
           <div class="row">
             <a href="#!">
-              <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                <i class="indigo-text text-lighten-1 large material-icons">person</i>
-                <span class="indigo-text text-lighten-1"><h5>Seller</h5></span>
+              <div style="padding: 30px;" class="  col s5 waves-effect">
+                <img width="150" height="200" src="img/comics/1.png"   />
+                <span class="indigo-text text-lighten-1"><h5>Marvel</h5></span>
               </div>
             </a>
             <div class="col s1">&nbsp;</div>
             <div class="col s1">&nbsp;</div>
 
             <a href="#!">
-              <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                <i class="indigo-text text-lighten-1 large material-icons">people</i>
+              <div style="padding: 30px;" class="  col s5 waves-effect">
+                <img width="150" height="200" src="img/comics/2.jpg"   />
                 <span class="indigo-text text-lighten-1"><h5>Customer</h5></span>
               </div>
             </a>
@@ -101,26 +103,18 @@
         <div style="padding: 35px;" align="center" class="card">
           <div class="row">
             <div class="left card-title">
-              <b>Product Management</b>
+              <b>Ver Tiendas</b>
             </div>
           </div>
           <div class="row">
             <a href="#!">
-              <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                <i class="indigo-text text-lighten-1 large material-icons">store</i>
-                <span class="indigo-text text-lighten-1"><h5>Product</h5></span>
+              <div style="padding: 30px;" class="col s5 waves-effect">
+                <img width="150" height="200" src="img/tienda.jpg"   />
+                <span class="indigo-text text-lighten-1"><h5>Tiendas</h5></span>
               </div>
-            </a>
-
+            </a> 
             <div class="col s1">&nbsp;</div>
-            <div class="col s1">&nbsp;</div>
-
-            <a href="#!">
-              <div style="padding: 30px;" class="grey lighten-3 col s5 waves-effect">
-                <i class="indigo-text text-lighten-1 large material-icons">assignment</i>
-                <span class="indigo-text text-lighten-1"><h5>Orders</h5></span>
-              </div>
-            </a>
+            <div class="col s1">&nbsp;</div> 
           </div>
         </div>
       </div>
@@ -184,25 +178,12 @@
       </div>
     </div>
 
+
      
   </main>
 
   <footer class="indigo page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h5 class="white-text">Icon Credits</h5>
-          <ul id='credits'>
-            <li>
-              Gif Logo made using <a href="http://formtypemaker.appspot.com/">Form Type Maker</a> from <a href="https://github.com/romannurik/FORMTypeMaker">romannurik</a>
-            </li>
-            <li>
-              Icons made by <a href="https://material.io/icons/">Google</a>, available under <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License Version 2.0</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+     
     <div class="footer-copyright">
       <div class="container">
         <span>Made By <a style='font-weight: bold;'  target="_blank">GOAL</a></span>

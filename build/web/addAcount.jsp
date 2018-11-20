@@ -41,35 +41,45 @@
                             <img src="img/logo.png" width="100" height="100" class="circle responsive-img">
                             <div class="row">
                                 
-                                <form  class="col s12" name="frmaddCliente" method="POST" action="./addCliente">
+                                <form  class="col s12" name="frmaddCliente" method="POST" action="./addUsuarioClienteServlet">
+                                    
+                                     <div class="row">
+                                         
+                                        <div class="input-field col s6"> 
+                                            <input  id="txtUsuario" name="txtUsuario" type="text" class="validate" required="true"> 
+                                            <label  for="txtUsuario">Usuario *</label>
+                                            
+                                        </div>
+                                        <div class="input-field col s6"> 
+                                            <input id="password" name="txtpassword" type="password" class="validate" required="true"> 
+                                            <label for="password">Contraseña *</label>
+                                            
+                                        </div>
+                                    </div>
 
                                     <div class="row">
-                                        <div class="input-field col s6">
+                                        <div class="input-field col s6"> 
                                             <input  id="txtNombre" name="txtNombre" type="text" class="validate">
                                             <label for="txtNombre">Nombre</label>
                                         </div>
-                                        <div class="input-field col s6">
+                                        <div class="input-field col s6"> 
                                             <input id="txtApellido" name="txtApellido" type="text" class="validate">
                                             <label for="txtApellido">Apellido</label>
                                         </div>
                                     </div>
-                                     <div class="row">
-                                        <div class="input-field col s6">
-                                            <input  id="txtUsuario" type="text" class="validate">
-                                            <label for="txtUsuario">Usuario</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input id="password" type="password" class="validate">
-                                            <label for="password">Password</label>
-                                        </div>
-                                    </div>
-                                     
+                                    
+                                    
                                     <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="email" type="email" class="validate">
-                                            <label for="email">Email</label>
+                                        <div class="input-field col s6"> 
+                                            <input  id="txtFeNacimiento" name="txtFecha" type="date" class="validate">
+                                            <label for="txtFeNacimiento">Fecha Nacimiento</label>
+                                        </div>
+                                        <div class="input-field col s6"> 
+                                            <input id="txtemail" name="txtemail" type="email" class="validate">
+                                            <label for="txtemail">Email</label>
                                         </div>
                                     </div>
+                                    <label for="password">* (Obligatorio)</label>
                                    
                                     <div class="row">
                                         <button class="btn waves-effect waves-light" type="submit" name="action">Crear cuenta</button>

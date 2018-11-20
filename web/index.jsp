@@ -62,57 +62,47 @@
   </style>
 </head>
 
-<body>
-
-  
-    
+<body> 
      <ul id="slide-out" class="side-nav fixed z-depth-2">
     <li class="center no-padding">
       <div class="indigo darken-2 white-text" style="height: 180px;">
         <div class="row">
           <img style="margin-top: 5%;" width="100" height="100" src="img/logo.png" class="circle responsive-img" />
-
+            <c:if test="${sessionScope.msgError != null}"> 
+                <div class="alert alert-success toast center" role="alert"  >
+                    <c:if test="${sessionScope.msgError!=null}"> 
+                        <fieldset><legend>Mensajes</legend>
+                            <c:out value="${sessionScope.msgError}"></c:out>
+                            <c:remove var="msgError"></c:remove>
+                            </fieldset> 
+                    </c:if>
+                </div>
+            </c:if> 
           <p style="margin-top: -13%;">
             Tenda web cómics
           </p>
         </div>
-      </div>
-        
-        
-        
+      </div> 
     </li>
 
-    <li id="dash_dashboard"><a class="waves-effect" href="index.jsp"><b>Tiwebcom</b></a></li>
+    <li id="dash_dashboard"><a class="waves-effect" href="index.jsp"><b>Tiwebcom Inicio</b></a></li>
 
     <ul class="collapsible" data-collapsible="acordion">
       <li id="dash_users">
         <div id="dash_users_header" class="collapsible-header waves-effect"><b>Usuarios</b></div>
         <div id="dash_users_body" class="collapsible-body">
           <ul>
-            
-              <li id="users_seller">
-              <a class="waves-effect" style="text-decoration: none;" href="addAcount.jsp">Crear cuenta</a>
-            </li>
-              <li id="users_seller">
+            <li id="users_seller">
               <a class="waves-effect" style="text-decoration: none;" href="login.jsp">Ingresar</a>
             </li>
- 
- 
+              <li id="users_seller">
+              <a class="waves-effect" style="text-decoration: none;" href="addAcount.jsp">Crear cuenta</a>
+            </li>  
           </ul>
         </div>
       </li>
 
-      <li id="dash_products">
-        <div id="dash_products_header" class="collapsible-header waves-effect"><b>Products</b></div>
-        <div id="dash_products_body" class="collapsible-body">
-          <ul>
-            <li id="products_product">
-              <a class="waves-effect" style="text-decoration: none;" href="home.jsp">home</a>
-              <a class="waves-effect" style="text-decoration: none;" href="#!">Orders</a>
-            </li>
-          </ul>
-        </div>
-      </li>
+       
  
 
        
@@ -197,15 +187,12 @@
           <div class="row">
             <a href="#!">
               <div style="padding: 30px;" class="col s5 waves-effect">
-                <img width="150" height="200" src="img/comics/tienda.jpg"   />
+                <img width="150" height="200" src="img/tienda.jpg"   />
                 <span class="indigo-text text-lighten-1"><h5>Tiendas</h5></span>
               </div>
-            </a>
-
+            </a> 
             <div class="col s1">&nbsp;</div>
-            <div class="col s1">&nbsp;</div>
-
-             
+            <div class="col s1">&nbsp;</div> 
           </div>
         </div>
       </div>
@@ -308,6 +295,7 @@
                 $(".dropdown-trigger").dropdown();
   	});
   </script>
+
 
 </body>
 </html>

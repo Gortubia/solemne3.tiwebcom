@@ -5,11 +5,11 @@
  */
 package cl.duoc.dej4501.solemne3.tiwebcom.persistence;
 
-import cl.duoc.dej4501.solemne3.tiwebcom.entity.Usuario;
+import cl.duoc.dej4501.solemne3.tiwebcom.entity.Usuario; 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContext;  
 
 /**
  *
@@ -20,6 +20,16 @@ public class UsuarioSessionBean {
     
     @PersistenceContext
     private EntityManager em;
+    
+     public List<Usuario> getAllUsuarios(){
+       return em.createNamedQuery("Usuario.findAll",Usuario.class)
+               .getResultList();
+    }
+    
+    
+    public Usuario getUsuarioById(int id){
+        return em.find(Usuario.class, id );
+    }
     
     public Usuario buscaUsuario (String loginUsuario, String passUsuario){
         Usuario usuario = null;
@@ -38,6 +48,39 @@ public class UsuarioSessionBean {
         return usuario;
         
     }
+    
+    public boolean findByLoginUsuario(String loginUsuario){
+        boolean usLogin = false;
+        
+        try {
+            List<Usuario> listausuario = em.createNamedQuery("Usuario.findByLoginUsuario", Usuario.class)
+                   .setParameter("loginUsuario", loginUsuario) 
+                    .getResultList();
+            if(!listausuario.isEmpty()){
+                usLogin = true;
+            }
+                   
+        } catch (Exception e) {
+        }
+        return usLogin;
+    }
+    
+    public int findmaXiD (){
+        int maxId = 0; 
+        try {
+            
+            maxId = (int)  em.createQuery("SELECT MAX(u.idUsuario) FROM Usuario u") 
+                    .getSingleResult();  
+        } catch (Exception e) {
+        }
+        return maxId;
+        
+    }
+    
+     public void guardarUsuario (Usuario us) throws ControllerException{
+                 em.persist(us);
+        
+     }
 
    
     

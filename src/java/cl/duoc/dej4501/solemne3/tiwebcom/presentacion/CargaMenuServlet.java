@@ -40,7 +40,7 @@ public class CargaMenuServlet extends HttpServlet {
             throws ServletException, IOException {
         
         Usuario objUsuarioConectado = (Usuario) request.getSession().getAttribute("usuarioConectado");        
-        List listadoMenu =  menuSB.cargarMenuPorPerfil(objUsuarioConectado.getCodigoPerfil().getIdPerfil());
+        List listadoMenu =  menuSB.cargarMenuPorPerfil(objUsuarioConectado.getCodigoPerfil());
         request.setAttribute("listadoMenu", listadoMenu);       
     }
 
