@@ -26,34 +26,33 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author adolf
  */
 @Entity
-@Table(name = "producto")
+@Table(catalog = "bdtiwebcom", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p")
     , @NamedQuery(name = "Producto.findById", query = "SELECT p FROM Producto p WHERE p.id = :id")
-    , @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")})
+    , @NamedQuery(name = "Producto.findByNombreProducto", query = "SELECT p FROM Producto p WHERE p.nombreProducto = :nombreProducto")
+    , @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio")
+    , @NamedQuery(name = "Producto.findByCategoria", query = "SELECT p FROM Producto p WHERE p.categoria = :categoria")
+    , @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")
+    , @NamedQuery(name = "Producto.findByBorrado", query = "SELECT p FROM Producto p WHERE p.borrado = :borrado")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
     @Size(max = 50)
-    @Column(name = "nombre")
-    private String nombre;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @Column(name = "stock")
-    private Long stock;
+    @Column(name = "nombre_producto")
+    private String nombreProducto;
+    private Integer precio;
+    @Size(max = 50)
+    private String categoria;
+    private Integer stock;
+    private Integer borrado;
     @OneToMany(mappedBy = "idProducto")
     private List<DetProducto> detProductoList;
-    @OneToMany(mappedBy = "idProducto")
-    private List<DetBoleta> detBoletaList;
 
     public Producto() {
     }
@@ -70,28 +69,44 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Integer getPrecio() {
+        return precio;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPrecio(Integer precio) {
+        this.precio = precio;
     }
 
-    public Long getStock() {
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(Integer borrado) {
+        this.borrado = borrado;
     }
 
     @XmlTransient
@@ -101,15 +116,6 @@ public class Producto implements Serializable {
 
     public void setDetProductoList(List<DetProducto> detProductoList) {
         this.detProductoList = detProductoList;
-    }
-
-    @XmlTransient
-    public List<DetBoleta> getDetBoletaList() {
-        return detBoletaList;
-    }
-
-    public void setDetBoletaList(List<DetBoleta> detBoletaList) {
-        this.detBoletaList = detBoletaList;
     }
 
     @Override

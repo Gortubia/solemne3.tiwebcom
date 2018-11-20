@@ -6,6 +6,7 @@
 package cl.duoc.dej4501.solemne3.tiwebcom.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,13 +27,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author adolf
  */
 @Entity
-@Table(name = "det_producto")
+@Table(name = "det_producto", catalog = "bdtiwebcom", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DetProducto.findAll", query = "SELECT d FROM DetProducto d")
     , @NamedQuery(name = "DetProducto.findByIdDetProducto", query = "SELECT d FROM DetProducto d WHERE d.idDetProducto = :idDetProducto")
-    , @NamedQuery(name = "DetProducto.findByDescripcion", query = "SELECT d FROM DetProducto d WHERE d.descripcion = :descripcion")
-    , @NamedQuery(name = "DetProducto.findByDetalleProducto", query = "SELECT d FROM DetProducto d WHERE d.detalleProducto = :detalleProducto")})
+    , @NamedQuery(name = "DetProducto.findByEditorial", query = "SELECT d FROM DetProducto d WHERE d.editorial = :editorial")
+    , @NamedQuery(name = "DetProducto.findByAutor", query = "SELECT d FROM DetProducto d WHERE d.autor = :autor")
+    , @NamedQuery(name = "DetProducto.findByFechaPublicacion", query = "SELECT d FROM DetProducto d WHERE d.fechaPublicacion = :fechaPublicacion")
+    , @NamedQuery(name = "DetProducto.findByNEdicion", query = "SELECT d FROM DetProducto d WHERE d.nEdicion = :nEdicion")
+    , @NamedQuery(name = "DetProducto.findByPaginas", query = "SELECT d FROM DetProducto d WHERE d.paginas = :paginas")
+    , @NamedQuery(name = "DetProducto.findByBorrado", query = "SELECT d FROM DetProducto d WHERE d.borrado = :borrado")})
 public class DetProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,11 +47,16 @@ public class DetProducto implements Serializable {
     @Column(name = "id_det_producto")
     private Integer idDetProducto;
     @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
+    private String editorial;
     @Size(max = 100)
-    @Column(name = "detalleProducto")
-    private String detalleProducto;
+    private String autor;
+    @Column(name = "fecha_publicacion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaPublicacion;
+    @Column(name = "n_edicion")
+    private Integer nEdicion;
+    private Integer paginas;
+    private Integer borrado;
     @JoinColumn(name = "id_producto", referencedColumnName = "id")
     @ManyToOne
     private Producto idProducto;
@@ -64,20 +76,52 @@ public class DetProducto implements Serializable {
         this.idDetProducto = idDetProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getEditorial() {
+        return editorial;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
     }
 
-    public String getDetalleProducto() {
-        return detalleProducto;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setDetalleProducto(String detalleProducto) {
-        this.detalleProducto = detalleProducto;
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public Integer getNEdicion() {
+        return nEdicion;
+    }
+
+    public void setNEdicion(Integer nEdicion) {
+        this.nEdicion = nEdicion;
+    }
+
+    public Integer getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(Integer paginas) {
+        this.paginas = paginas;
+    }
+
+    public Integer getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(Integer borrado) {
+        this.borrado = borrado;
     }
 
     public Producto getIdProducto() {

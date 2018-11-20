@@ -24,13 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author adolf
  */
 @Entity
-@Table(name = "det_boleta")
+@Table(name = "det_boleta", catalog = "bdtiwebcom", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DetBoleta.findAll", query = "SELECT d FROM DetBoleta d")
     , @NamedQuery(name = "DetBoleta.findByIdDetBoleta", query = "SELECT d FROM DetBoleta d WHERE d.idDetBoleta = :idDetBoleta")
     , @NamedQuery(name = "DetBoleta.findByCantidad", query = "SELECT d FROM DetBoleta d WHERE d.cantidad = :cantidad")
-    , @NamedQuery(name = "DetBoleta.findByPrecio", query = "SELECT d FROM DetBoleta d WHERE d.precio = :precio")
     , @NamedQuery(name = "DetBoleta.findBySubTotal", query = "SELECT d FROM DetBoleta d WHERE d.subTotal = :subTotal")})
 public class DetBoleta implements Serializable {
 
@@ -40,12 +39,9 @@ public class DetBoleta implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_det_boleta")
     private Integer idDetBoleta;
-    @Column(name = "cantidad")
     private Long cantidad;
-    @Column(name = "precio")
-    private Long precio;
     @Column(name = "sub_total")
-    private Long subTotal;
+    private Integer subTotal;
     @JoinColumn(name = "id_boleta", referencedColumnName = "id_boleta")
     @ManyToOne
     private Boleta idBoleta;
@@ -76,19 +72,11 @@ public class DetBoleta implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Long getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Long precio) {
-        this.precio = precio;
-    }
-
-    public Long getSubTotal() {
+    public Integer getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(Long subTotal) {
+    public void setSubTotal(Integer subTotal) {
         this.subTotal = subTotal;
     }
 

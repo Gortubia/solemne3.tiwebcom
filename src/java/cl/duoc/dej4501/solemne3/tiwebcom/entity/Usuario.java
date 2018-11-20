@@ -7,38 +7,40 @@ package cl.duoc.dej4501.solemne3.tiwebcom.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author adolf
  */
 @Entity
-@Table(name = "usuario")
+@Table(catalog = "bdtiwebcom", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    ,@NamedQuery(name = "Usuario.validador", query = "SELECT u FROM Usuario u WHERE u.loginUsuario = :loginUsuario AND u.passUsuario = :passUsuario")
     , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
     , @NamedQuery(name = "Usuario.findByLoginUsuario", query = "SELECT u FROM Usuario u WHERE u.loginUsuario = :loginUsuario")
     , @NamedQuery(name = "Usuario.findByPassUsuario", query = "SELECT u FROM Usuario u WHERE u.passUsuario = :passUsuario")
     , @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT u FROM Usuario u WHERE u.nombreUsuario = :nombreUsuario")
     , @NamedQuery(name = "Usuario.findByApellidoUsuario", query = "SELECT u FROM Usuario u WHERE u.apellidoUsuario = :apellidoUsuario")
     , @NamedQuery(name = "Usuario.findByCorreoUsuario", query = "SELECT u FROM Usuario u WHERE u.correoUsuario = :correoUsuario")
-    , @NamedQuery(name = "Usuario.findByFechaNacimientousuario", query = "SELECT u FROM Usuario u WHERE u.fechaNacimientousuario = :fechaNacimientousuario")})
+    , @NamedQuery(name = "Usuario.findByCodigoPerfil", query = "SELECT u FROM Usuario u WHERE u.codigoPerfil = :codigoPerfil")
+    , @NamedQuery(name = "Usuario.findByFechaNacimientousuario", query = "SELECT u FROM Usuario u WHERE u.fechaNacimientousuario = :fechaNacimientousuario")
+    , @NamedQuery(name = "Usuario.findByBorrado", query = "SELECT u FROM Usuario u WHERE u.borrado = :borrado")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,12 +64,14 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "correo_usuario")
     private String correoUsuario;
+    @Column(name = "codigo_perfil")
+    private Integer codigoPerfil;
     @Column(name = "fechaNacimiento_usuario")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimientousuario;
-    @JoinColumn(name = "codigo_perfil", referencedColumnName = "id_perfil")
-    @ManyToOne
-    private Perfil codigoPerfil;
+    private Integer borrado;
+    @OneToMany(mappedBy = "idUsuario")
+    private List<Cliente> clienteList;
 
     public Usuario() {
     }
@@ -124,6 +128,14 @@ public class Usuario implements Serializable {
         this.correoUsuario = correoUsuario;
     }
 
+    public Integer getCodigoPerfil() {
+        return codigoPerfil;
+    }
+
+    public void setCodigoPerfil(Integer codigoPerfil) {
+        this.codigoPerfil = codigoPerfil;
+    }
+
     public Date getFechaNacimientousuario() {
         return fechaNacimientousuario;
     }
@@ -132,12 +144,21 @@ public class Usuario implements Serializable {
         this.fechaNacimientousuario = fechaNacimientousuario;
     }
 
-    public Perfil getCodigoPerfil() {
-        return codigoPerfil;
+    public Integer getBorrado() {
+        return borrado;
     }
 
-    public void setCodigoPerfil(Perfil codigoPerfil) {
-        this.codigoPerfil = codigoPerfil;
+    public void setBorrado(Integer borrado) {
+        this.borrado = borrado;
+    }
+
+    @XmlTransient
+    public List<Cliente> getClienteList() {
+        return clienteList;
+    }
+
+    public void setClienteList(List<Cliente> clienteList) {
+        this.clienteList = clienteList;
     }
 
     @Override

@@ -6,19 +6,16 @@
 package cl.duoc.dej4501.solemne3.tiwebcom.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,12 +39,6 @@ public class Perfil implements Serializable {
     @Size(max = 35)
     @Column(name = "nombre_perfil")
     private String nombrePerfil;
-    @OneToMany(mappedBy = "idCodigo")
-    private List<Menu> menuList;
-    @OneToMany(mappedBy = "idPerfil")
-    private List<Cliente> clienteList;
-    @OneToMany(mappedBy = "codigoPerfil")
-    private List<Usuario> usuarioList;
 
     public Perfil() {
     }
@@ -70,33 +61,6 @@ public class Perfil implements Serializable {
 
     public void setNombrePerfil(String nombrePerfil) {
         this.nombrePerfil = nombrePerfil;
-    }
-
-    @XmlTransient
-    public List<Menu> getMenuList() {
-        return menuList;
-    }
-
-    public void setMenuList(List<Menu> menuList) {
-        this.menuList = menuList;
-    }
-
-    @XmlTransient
-    public List<Cliente> getClienteList() {
-        return clienteList;
-    }
-
-    public void setClienteList(List<Cliente> clienteList) {
-        this.clienteList = clienteList;
-    }
-
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
     }
 
     @Override

@@ -6,7 +6,6 @@
 package cl.duoc.dej4501.solemne3.tiwebcom.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,24 +16,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author adolf
  */
 @Entity
-@Table(name = "cliente")
+@Table(catalog = "bdtiwebcom", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")
     , @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente")
     , @NamedQuery(name = "Cliente.findByRut", query = "SELECT c FROM Cliente c WHERE c.rut = :rut")
-    , @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT c FROM Cliente c WHERE c.direccion = :direccion")})
+    , @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT c FROM Cliente c WHERE c.direccion = :direccion")
+    , @NamedQuery(name = "Cliente.findByBorrado", query = "SELECT c FROM Cliente c WHERE c.borrado = :borrado")})
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,16 +42,13 @@ public class Cliente implements Serializable {
     @Column(name = "id_cliente")
     private Integer idCliente;
     @Size(max = 12)
-    @Column(name = "rut")
     private String rut;
     @Size(max = 200)
-    @Column(name = "direccion")
     private String direccion;
-    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
+    private Integer borrado;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne
-    private Perfil idPerfil;
-    @OneToMany(mappedBy = "idCliente")
-    private List<Boleta> boletaList;
+    private Usuario idUsuario;
 
     public Cliente() {
     }
@@ -86,21 +81,20 @@ public class Cliente implements Serializable {
         this.direccion = direccion;
     }
 
-    public Perfil getIdPerfil() {
-        return idPerfil;
+    public Integer getBorrado() {
+        return borrado;
     }
 
-    public void setIdPerfil(Perfil idPerfil) {
-        this.idPerfil = idPerfil;
+    public void setBorrado(Integer borrado) {
+        this.borrado = borrado;
     }
 
-    @XmlTransient
-    public List<Boleta> getBoletaList() {
-        return boletaList;
+    public Usuario getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setBoletaList(List<Boleta> boletaList) {
-        this.boletaList = boletaList;
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override
