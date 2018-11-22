@@ -49,6 +49,12 @@ public class ProductoSessionBean {
                  em.persist(producto);
         
      }
+     
+       public void deleteProducto (int id) throws ControllerException{
+        
+        Producto prod = em.find(Producto.class,id);
+        em.remove(prod);
+    }
 
     
 }

@@ -31,9 +31,7 @@
     <body>
         <c:if test="${sessionScope.usuarioConectado == null}">
         <c:redirect url="login.jsp"></c:redirect></c:if>
-        <jsp:useBean   id="perfil" class="cl.duoc.dej4501.solemne3.tiwebcom.entity.Perfil" scope="page" ></jsp:useBean>
-        <jsp:include page="../getPerfiles" flush="true"></jsp:include>  
-         
+             
             <nav class="indigo " role="navigation"> 
                 <div class="col m8 s8 offset-m2 offset-s2 center">
                     <h4>Mantenedor Usuarios</h4>
@@ -62,7 +60,7 @@
 
                                 <div class="input-field col s6"> 
                                     <input  id="txtNombre" name="txtNombre" type="text" class="validate" required="true"> 
-                                    <label class="center-align" for="txtUsuario">Nombre *</label>
+                                    <label class="center-align" for="txtUsuario">Nombre producto*</label>
 
                                 </div>
                                 <div class="input-field col s6"> 
@@ -75,7 +73,7 @@
                             <div class="row">
                                 <div class="input-field col s6"> 
                                     <input  id="txtDescripcion" name="txtDescripcion" type="text" class="validate">
-                                    <label class="center-align" for="frmDesc">Descripción</label>
+                                    <label class="center-align" for="frmDesc">Categoria</label>
                                 </div>
                                 <div class="input-field col s6"> 
                                     <input id="txtStock" name="txtStock" type="number" class="validate">

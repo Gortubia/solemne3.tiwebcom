@@ -10,6 +10,7 @@ import cl.duoc.dej4501.solemne3.tiwebcom.persistence.ProductoSessionBean;
 import java.io.IOException; 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EnumType;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +44,7 @@ public class AddProductoServlet extends HttpServlet {
          HttpSession sesion = request.getSession();
         List<Producto> listaProductos = this.productoSB.getAllProductos();
         sesion.setAttribute("listaProductos", listaProductos);
-        response.sendRedirect("./producto/mantenedorProducto.jsp");
+        response.sendRedirect("./producto/listProducto.jsp");
         
     }
 
@@ -60,25 +61,26 @@ public class AddProductoServlet extends HttpServlet {
             throws ServletException, IOException {
         
          Producto prod = new Producto();
-          
+         String dir =  request.getContextPath();
+         
         String nombre = request.getParameter("txtNombre");
         int precio = Integer.parseInt(request.getParameter("txtPrecio"));
-        String descripcion = request.getParameter("txtDescripcion");
+        String categoria = request.getParameter("txtDescripcion");
         int stock = Integer.parseInt(request.getParameter("txtStock"));
         int idProd =(productoSB.findmaXiD()) + 1;
-         
+        
          
         prod.setId(idProd); 
-        prod.setNombre(nombre);
-        prod.setPrecioUnitario(precio); 
-        prod.setDescripcion(descripcion); 
+        prod.setNombreProducto(nombre);
+        prod.setPrecio(precio); 
+        prod.setCategoria(categoria); 
         prod.setStock(stock);
         
         
         try {
              this.productoSB.guardarProducto(prod);
-             request.getSession().setAttribute("msgError", "Producto registrado"); 
-             response.sendRedirect("./producto/mantenedorProducto.jsp");
+                 request.getSession().setAttribute("msgError", "Producto registrado"); 
+             response.sendRedirect("./producto/listProducto.jsp");
         } catch (Exception e) {
             request.getSession().setAttribute("msgError", "Error al grabar información");
            response.sendRedirect("./producto/addProducto.jsp");

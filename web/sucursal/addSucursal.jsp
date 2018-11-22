@@ -76,26 +76,26 @@
                     <div class="card-header">
                         <i class="fa fa-user"></i>Agregar Productos al sistema</div>
                     <div class="card-body"> 
-                        <form  class="col s12" name="frmAddProducto" method="POST" action="../addProductoServlet">
+                        <form  class="col s12" name="frmAddProducto" method="POST" action="../addSucursalServlet">
 
                             <div class="row">
 
                                 <div class="input-field col s6"> 
-                                    <input  id="txtNombre" name="txtNombre" type="text" class="validate" required="true"> 
-                                    <label class="center-align" for="txtUsuario">Descripcion *</label>
+                                    <input  id="txtDescripcion" name="txtDescripcion" type="text" class="validate" required="true"> 
+                                    <label class="center-align" for="txtDescripcion">Sucursal</label>
 
                                 </div>
                                 <div class="input-field col s6"> 
-                                    <input id="txtPrecio" name="txtPrecio" type="number" class="validate" required="true"> 
-                                    <label class="center-align" for="frPrecio">telefono *</label>
+                                    <input id="txtDireccion" name="txtDireccion" type="text" class="validate" required="true"> 
+                                    <label class="center-align" for="frDireccion">Direccion *</label>
 
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s6"> 
-                                    <input  id="txtDescripcion" name="txtDescripcion" type="text" class="validate">
-                                    <label class="center-align" for="frmDesc">Direccion</label>
+                                    <input  id="txtTelefono" name="txtTelefono" type="text" class="validate">
+                                    <label class="center-align" for="frmTel">Teléfono</label>
                                 </div>
                              <div class="input-field col s6">                               
                               <div class="form-row">

@@ -31,4 +31,10 @@ public class SucursalSessionBean {
     public Sucursal getSucursalById(int id){
         return em.find(Sucursal.class, id );
     }
+    
+     public void guardarSucursal (Sucursal sucursal) throws ControllerException{
+                 em.persist(sucursal);
+        
+     }
+
 }
